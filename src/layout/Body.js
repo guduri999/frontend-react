@@ -3,7 +3,7 @@ import { Container, Card, Button, Row } from "react-bootstrap";
 
 const Body = () => {
     return (
-        <Container>
+        <Container className="mt-5">
             <Row>
                 <Card style={{ width: '12rem' }} className="m-2">
                     <Card.Header>

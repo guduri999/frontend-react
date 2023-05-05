@@ -7,7 +7,7 @@ import { Row, Col } from "react-bootstrap";
 
 const Header = () => {
     return (
-        <Navbar bg="warning">
+        <Navbar bg="warning" className="fixed-top">
             <Row>
                 <Col>
                     <Navbar.Brand> Welcome to Courses</Navbar.Brand>
