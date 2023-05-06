@@ -6,7 +6,11 @@ import Navbar from "react-bootstrap/Navbar";
 import { Row, Col } from "react-bootstrap";
 
 const Header = ({ passLoginDetails }) => {
-    console.log(passLoginDetails, 'from header')
+
+    localStorage.setItem('userDetails', JSON.stringify(passLoginDetails));
+
+    const val = localStorage.getItem('userDetails');
+    console.log(val)
     return (
         <Navbar bg="warning" className="fixed-top">
             <Row>
