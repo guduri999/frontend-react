@@ -4,11 +4,11 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
 
-const Login = () => {
+const Login = ({ setLogInDetails }) => {
 
     let navigate = useNavigate()
-    const [login, setLoging] = useState();
 
+    const [login, setLoging] = useState();
     const [userName, setUserName] = useState()
     const [password, setPassword] = useState()
 
@@ -27,20 +27,16 @@ const Login = () => {
                 }
             })
             .catch(error => console.log(error))
-
-        console.log(login.status, "status code")
-
     }
 
     useEffect(() => {
 
         if (login?.status === 200) {
-
+            setLogInDetails(login)
             navigate("/home")
+
         }
     })
-
-    console.log(login, "testing")
     return (
         <Container>
             <Row>
