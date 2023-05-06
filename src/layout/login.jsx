@@ -1,21 +1,23 @@
 import { Form, Button, Container, Row, Col } from "react-bootstrap"
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
 
-    const form = (e) => {
-        e.previentDefault()
-        console.log(userName, password, "previent Default")
-    }
-
+    let navigate = useNavigate()
     const [login, setLoging] = useState();
 
     const [userName, setUserName] = useState()
     const [password, setPassword] = useState()
 
-    useEffect(() => {
-        axios.post('http://localhost:8000/userLogin', {
+    const form = async (e) => {
+
+        e.preventDefault();
+
+        await axios.post('http://localhost:8000/userLogin', {
+
             Password: password, //'guduri',
             userName: userName //'sandeep'
         })
@@ -24,11 +26,21 @@ const Login = () => {
                     setLoging(response)
                 }
             })
-            .catch(error => console.log(error));
-    }, [userName, password]);
+            .catch(error => console.log(error))
 
-    console.log(login, "testing");
-    console.log(userName, password, "testing code")
+        console.log(login.status, "status code")
+
+    }
+
+    useEffect(() => {
+
+        if (login?.status === 200) {
+
+            navigate("/home")
+        }
+    })
+
+    console.log(login, "testing")
     return (
         <Container>
             <Row>
@@ -39,7 +51,6 @@ const Login = () => {
                             <Form.Label>UserId</Form.Label>
                             <Form.Control type="text" placeholder="Enter email" value={userName} onChange={(e) => setUserName(e.target.value)} />
                         </Form.Group>
-
                         <Form.Group className="mb-3" controlId="formBasicPassword" value={password} onChange={(e) => setPassword(e.target.value)}>
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder="Password" />
